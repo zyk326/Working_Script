@@ -1,0 +1,18 @@
+ema': None, 'updates': None, 'optimizer': None, 'opt': 
+{'weights': '../runs/train-seg/2025-04-09-04-11_SIM_Airtag_G_yolov5s6-seg_hyp.scratch-low/weights/best.pt', 
+ 'cfg': '../models/segment/yolov5s6-seg.yaml', 
+ 'data': '../data/Airtag_SIM_20231217_G.yaml', 
+ 'hyp': {'lr0': 0.01, 'lrf': 0.01, 
+         'momentum': 0.937, 'weight_decay': 0.0001, 'warmup_epochs': 3.0, 'warmup_momentum': 0.8, 'warmup_bias_lr': 0.1, 'box': 0.05, 'cls': 0.5, 'cls_pw': 1.0, 'obj': 1.0, 
+         'obj_pw': 1.0, 'iou_t': 0.2, 'anchor_t': 4.0, 'fl_gamma': 0.0, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.1, 'scale': 0.4, 'shear': 0.0, 'perspective': 0.0, 
+         'flipud': 0.2, 'fliplr': 0.2, 'mosaic': 1.0, 'mixup': 0.0, 'copy_paste': 0.0}, 'epochs': 300, 'batch_size': 8, 
+         'label_txt_path': WindowsPath('../data/label_name/label_name_SIM_Airtag_G.txt'), 
+
+         'imgsz': 640, 
+         
+         'rect': True, 'resume': False, 'nosave': False, 'noval': False, 'noautoanchor': False, 
+         'noplots': False, 'evolve': None, 'bucket': '', 'cache': None, 'image_weights': False, 'device': '0,1,2,3', 
+         'multi_scale': False, 'single_cls': False, 'optimizer': 'SGD', 'sync_bn': True, 'workers': 1, 'project': '../runs/train-seg', 
+         'name': '2025-04-18-11-49_SIM_Airtag_G_yolov5s6-seg_hyp.scratch-low', 'exist_ok': False, 'quad': False, 'cos_lr': False, 'label_smoothing': 0.05, 
+         'patience': 100, 'freeze': [0], 'save_period': -1, 'seed': 0, 'local_rank': -1, 'mask_ratio': 4, 'no_overlap': False, 'save_dir': '../runs/train-seg/2025-04-18-11-49_SIM_Airtag_G_yolov5s6-seg_hyp.scratch-low'}, 
+'date': '2025-04-18T19:07:26.343054', 'wandb_id': None}
