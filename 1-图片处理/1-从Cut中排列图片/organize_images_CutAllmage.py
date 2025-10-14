@@ -107,7 +107,7 @@ def organize_images_by_prefix(cutai_image_path, result_root_dir, subfolder_name)
 
 def process_all_subfolders(root_path):
     """
-    遍历根目录下的所有子文件夹，找到CutAIImage文件夹并进行分类整理
+    遍历根目录下的所有嵌套子文件夹，找到任意层级的 CutAIImage 文件夹并进行分类整理
     将所有结果统一放到根目录下的"结果"文件夹中
     
     Args:
@@ -118,7 +118,7 @@ def process_all_subfolders(root_path):
         print(f"错误：根目录 {root_path} 不存在")
         return
     
-    print(f"开始扫描根目录: {root_path}")
+    print(f"开始扫描根目录(递归): {root_path}")
     print("=" * 60)
     
     # 创建结果文件夹
@@ -126,43 +126,29 @@ def process_all_subfolders(root_path):
     os.makedirs(result_dir, exist_ok=True)
     print(f"创建结果文件夹: {result_dir}")
     
-    # 获取所有子文件夹
-    subfolders = []
-    for item in os.listdir(root_path):
-        item_path = os.path.join(root_path, item)
-        if os.path.isdir(item_path) and item != "结果":  # 排除结果文件夹
-            subfolders.append(item)
-    
-    if not subfolders:
-        print("根目录下没有找到子文件夹")
-        return
-    
-    print(f"找到 {len(subfolders)} 个子文件夹")
-    
     total_processed = 0
     total_cutai_folders = 0
+    total_dirs_scanned = 0
     
-    # 遍历每个子文件夹
-    for subfolder in subfolders:
-        subfolder_path = os.path.join(root_path, subfolder)
-        cutai_path = os.path.join(subfolder_path, "CutAIImage")
+    # 递归遍历所有层级
+    for dirpath, dirnames, filenames in os.walk(root_path):
+        # 跳过结果文件夹以避免自包含
+        dirnames[:] = [d for d in dirnames if d != "结果"]
+        total_dirs_scanned += 1
         
-        print(f"\n处理子文件夹: {subfolder}")
-        
-        # 检查是否存在CutAIImage文件夹
-        if os.path.exists(cutai_path):
+        # 检查当前目录是否包含 CutAIImage
+        if "CutAIImage" in dirnames:
+            cutai_path = os.path.join(dirpath, "CutAIImage")
             print(f"  找到CutAIImage文件夹: {cutai_path}")
             total_cutai_folders += 1
-            
-            # 处理这个CutAIImage文件夹，将结果放到结果目录中
-            processed_count = organize_images_by_prefix(cutai_path, result_dir, subfolder)
+            # 使用所在上级目录名作为 subfolder_name
+            subfolder_name = os.path.basename(dirpath) or "root"
+            processed_count = organize_images_by_prefix(cutai_path, result_dir, subfolder_name)
             total_processed += processed_count
-        else:
-            print(f"  未找到CutAIImage文件夹，跳过")
     
     print("\n" + "=" * 60)
     print(f"扫描完成！")
-    print(f"总共扫描了 {len(subfolders)} 个子文件夹")
+    print(f"累计扫描目录数: {total_dirs_scanned}")
     print(f"找到 {total_cutai_folders} 个CutAIImage文件夹")
     print(f"总共处理了 {total_processed} 个前缀类别")
     print(f"所有分类结果已保存到: {result_dir}")
@@ -263,7 +249,7 @@ def process_batch_folders():
     
     # 确认操作
     print(f"\n即将扫描根目录: {root_path}")
-    print("此操作将遍历所有子文件夹，找到CutAIImage文件夹并进行分类整理")
+    print("此操作将递归遍历所有子文件夹，找到任意层级的 CutAIImage 并进行分类整理")
     
     confirm = input("确认继续吗？(y/N): ").strip().lower()
     if confirm in ['y', 'yes', '是']:
