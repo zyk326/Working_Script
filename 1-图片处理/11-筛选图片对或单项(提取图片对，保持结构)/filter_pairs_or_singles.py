@@ -13,17 +13,18 @@ from typing import Dict, Iterable, List, Optional, Set, Tuple
 ROOT_DIRS = [
 	# r"Y:\\path\\to\\root1",
 	# r"Y:\\path\\to\\root2",
-    r"Y:\4_训练数据\2025-06-24立讯 吉安  国产手机充电器 Cos AOI\20250904",
+    r"U:\标注任务\2025-06-24立讯 吉安  国产手机充电器 Cos AOI\1016\init",
 ]
 
 # 输出根目录：将保持相对每个源根目录的结构进行保存
-OUT_ROOT = r"Y:\4_训练数据\2025-06-24立讯 吉安  国产手机充电器 Cos AOI\20250904-pair"
+OUT_ROOT = r"U:\标注任务\2025-06-24立讯 吉安  国产手机充电器 Cos AOI\1016\single"
 
 # 处理模式：是否剪切替代复制（True=剪切/移动；False=复制）
 MOVE_INSTEAD_OF_COPY = False
 
 # 处理对象："pair" 表示图片对（图片+同名json）；"single" 表示单个图片（无对应json）
-PROCESS_TARGET = "pair"  # 可选值："pair" 或 "single"
+# PROCESS_TARGET = "pair"  # 可选值："pair" 或 "single"
+PROCESS_TARGET = "single"  # 可选值："pair" 或 "single"
 
 # 图片扩展名（用于识别图片文件）
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
