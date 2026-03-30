@@ -17,7 +17,7 @@ import numpy as np
 
 # 要处理的多个路径
 INPUT_PATHS = [
-    r"U:\标注任务\2025-04-07领益 东莞  B25 SIM tool卡针外观检测\2025-10-15-漏检\针尖卷边2psc\G",
+    r"C:\Users\Administrator\Desktop\B25\内侧压伤\内侧压伤",
     # r"16-纵横裁图/路径2"
 ]
 
@@ -71,6 +71,7 @@ def process_image(img_path, mode):
         # 拼接：上方是左半部分，下方是右半部分
         result = cv2.vconcat([left, right])
     elif mode == "height":
+        print(img_path)
         mid = h // 2
         top = img[:mid, :]
         bottom = img[mid:, :]
